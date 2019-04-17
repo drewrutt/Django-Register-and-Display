@@ -1,0 +1,1 @@
+User Registration and Displaying that information in Django.
