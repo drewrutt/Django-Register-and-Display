@@ -1,1 +1,1 @@
-User Registration and Displaying that information in Django.
+User Registration and Displaying that information in Python with sqlite3 and Flask for Python.
