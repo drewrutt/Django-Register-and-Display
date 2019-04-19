@@ -34,7 +34,7 @@ class formReg(Form):
   address1 = StringField('Address 1', [validators.length(min=1, max=95)])
   address2 = StringField('Address 2')
   city = StringField('City', [validators.length(min=1, max=35)])
-  state = StringField('State', [validators.length(min=1, max=2)])
+  state = StringField('State (2 Digit Code)', [validators.length(min=1, max=2)])
   zipCode = StringField('Zip Code', [validators.length(min=5, max=9)])
   country = StringField('Country', [validators.length(min=1, max=2)])
 
@@ -51,7 +51,8 @@ def index():
       zc = form.zipCode.data
       country = form.country.data
 
-      today = date.today()
+      today = datetime.now()
+      today = today.strftime("%Y-%m-%d %H:%M:%S")
 
       #Get the database and insert into the table
       conn = get_db()
@@ -67,13 +68,29 @@ def index():
 
       #Flash the notice that the record was added
       flash('Successfully Registered')
-      return render_template('admin.html')
+      return render_template('index.html', form=form)
 
     return render_template('index.html', form=form)
 
-@app.route('/admin')
-def about():
-  return render_template('admin.html')
+@app.route('/admin', methods=['GET', 'POST'])
+def admin():
+  conn = get_db()
+  c = conn.cursor()
+  #Testing to see if it works
+  c.execute("SELECT * from USER")
+  rows = c.fetchall()
+
+  print(len(rows))
+
+  if request.method == 'POST':
+    c.execute("DELETE FROM USER")
+    conn.commit()
+    conn.close()
+    
+    return render_template('admin.html', rows=rows)
+
+  conn.close()
+  return render_template('admin.html', rows=rows)
 
 if __name__ == '__main__':
   app.secret_key='superSecret'

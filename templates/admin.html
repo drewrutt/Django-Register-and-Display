@@ -1,9 +1,37 @@
 {% extends 'pageLayout.html' %}
 
 {% block body %}
-  <table>
+  <h2>Admin Page</h2>
+  {% from "helpers/formHelpers.html" import render_field %}
+  <table class="table">
+    <thead>
+        <td scope="col">First Name</td>
+        <td scope="col">Last Name</td>
+        <td scope="col">Address 1</td>
+        <td scope="col">Address 2</td>
+        <td scope="col">City</td>
+        <td scope="col">State</td>
+        <td scope="col">Zip</td>
+        <td scope="col">Country</td>
+        <td scope="col">Date</td>
+    </thead>
     <tbody>
+    {% for row in rows %}
+        <tr>
+          <td scope="row">{{row[0]}}</td>
+          <td scope="row">{{row[1]}}</td>
+          <td scope="row">{{row[2]}}</td>
+          <td scope="row">{{row[3]}}</td>
+          <td scope="row">{{row[4]}}</td>
+          <td scope="row">{{row[5]}}</td>
+          <td scope="row">{{row[6]}}</td>
+          <td scope="row">{{row[7]}}</td>
+          <td scope="row">{{row[8]}}</td>	
+        </tr>
+    {% endfor %}
     </tbody>
-  </table>
-  
+   </table>
+  <form method="POST" action="">
+    <input type="submit" class="btn btn-primary" value="Reset Database">
+  </form>
 {% endblock %}
