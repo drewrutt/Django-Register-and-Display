@@ -1,0 +1,33 @@
+{% extends 'pageLayout.html' %}
+
+{% block body %}
+  <h2>Please Register</h2>
+  {% from "helpers/formHelpers.html" import render_field %}
+  <form method="POST" action="">
+    <div class="form-group">
+      {{render_field(form.first_name, class_="form-control")}}
+    </div>
+    <div class="form-group">
+      {{render_field(form.last_name, class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{render_field(form.address1, class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{render_field(form.address2, class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{render_field(form.city, class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{render_field(form.state, class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{render_field(form.zipCode, class_="form-control")}}
+    </div>
+    <div class="form-group">
+        {{render_field(form.country, class_="form-control")}}
+    </div>
+    <input type="submit" class="btn btn-primary" value="Submit">
+  </form>
+{% endblock %}
