@@ -1,14 +1,19 @@
 import sqlite3
-from flask import Flask, g, render_template, flash, redirect, url_for, session, logging, request
-from datetime import date, datetime
+from flask import Flask, g, render_template, flash, redirect, url_for, session, request
+from datetime import datetime
 from wtforms import Form, StringField, validators
 
+#Create the app and set the "super secret" key
 app = Flask(__name__)
+app.secret_key='superSecret'
+
 DATABASE = 'user.db'
-states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", 
-          "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", 
-          "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
-          "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
+
+#The arrays for the form field validation
+states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA",
+          "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD",
+          "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ",
+          "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC",
 "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
 countries = ["US"]
 
@@ -95,14 +100,15 @@ def admin():
   rowstemp = c.fetchall()
   for row in rowstemp:
     rows.append(make_dicts(c, row))
-    
+
 
   #If there is a POST request, run the reset database query
   if request.method == 'POST':
     c.execute("DELETE FROM USER")
     conn.commit()
     conn.close()
-    
+    rows = []
+
     return render_template('admin.html', rows=rows)
 
   conn.close()
@@ -112,8 +118,6 @@ def admin():
 def confirmation():
   return render_template('confirmation.html')
 
-
 #main
 if __name__ == '__main__':
-  app.secret_key='superSecret'
   app.run(debug=True)
