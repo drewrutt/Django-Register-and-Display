@@ -108,6 +108,11 @@ def admin():
   conn.close()
   return render_template('admin.html', rows=rows)
 
+@app.route('/confirmation')
+def confirmation():
+  return render_template('confirmation.html')
+
+
 #main
 if __name__ == '__main__':
   app.secret_key='superSecret'
