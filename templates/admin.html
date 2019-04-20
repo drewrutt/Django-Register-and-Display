@@ -18,15 +18,15 @@
     <tbody>
     {% for row in rows %}
         <tr>
-          <td scope="row">{{row[0]}}</td>
-          <td scope="row">{{row[1]}}</td>
-          <td scope="row">{{row[2]}}</td>
-          <td scope="row">{{row[3]}}</td>
-          <td scope="row">{{row[4]}}</td>
-          <td scope="row">{{row[5]}}</td>
-          <td scope="row">{{row[6]}}</td>
-          <td scope="row">{{row[7]}}</td>
-          <td scope="row">{{row[8]}}</td>	
+          <td scope="row">{{row["first_name"]}}</td>
+          <td scope="row">{{row["last_name"]}}</td>
+          <td scope="row">{{row["address1"]}}</td>
+          <td scope="row">{{row["address2"]}}</td>
+          <td scope="row">{{row["city"]}}</td>
+          <td scope="row">{{row["state"]}}</td>
+          <td scope="row">{{row["zip"]}}</td>
+          <td scope="row">{{row["country"]}}</td>
+          <td scope="row">{{row["created_at"]}}</td>	
         </tr>
     {% endfor %}
     </tbody>
